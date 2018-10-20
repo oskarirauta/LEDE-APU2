@@ -19,7 +19,7 @@ define KernelPackage/apu2-gpio
   KCONFIG:=CONFIG_GPIO_APU
   FILES:=$(LINUX_DIR)/drivers/gpio/gpio-apu.ko
   AUTOLOAD:=$(call AutoLoad,80,gpio-apu)
-  DEPENDS:= @GPIO_SUPPORT @TARGET_x86
+  DEPENDS:=@TARGET_x86||TARGET_x86_64 @GPIO_SUPPORT
 endef
 
 define KernelPackage/apu2-gpio/description
