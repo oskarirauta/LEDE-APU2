@@ -1,10 +1,11 @@
-# LEDE-APU2
+# OpenWRT-APU2
 
-Bringup repo for the PC Engines APU2 on LEDE!
+Bringup repo for the PC Engines APU2 on OpenWRT!
 
-Currently based on LEDE Nightlies. Note that all major code has been merged upstream. This repo will provide you with an example board profile and make config to help assist in building, but is not required.
+Currently based on OpenWRT Nightlies. This repo will provide you with an example board profile and make config to help assist in building, but is not required.
+Adds missing drivers and few extra packages.
 
-**NOTE:** This repo is no longer maintained as the important drivers (LEDE, Watchdog, GPIO) were merged upstream into LEDE.
+**NOTE:** This repo is not actively maintained.
 
 Building
 -----
