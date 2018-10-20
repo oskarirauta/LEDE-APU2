@@ -1,4 +1,4 @@
-# OpenWRT-APU2
+# OpenWRT-APU3
 
 Bringup repo for the PC Engines APU3 on OpenWRT!
 
