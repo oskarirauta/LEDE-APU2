@@ -7,11 +7,13 @@
 
 define Profile/APU2
   NAME:=PC Engines APU2
-  PACKAGES:=beep flashrom libsensors lm-sensors usbutils wpad-mini \
+  PACKAGES:=beep flashrom libsensors lm-sensors usbutils wpad \
 	kmod-ath9k kmod-ath10k kmod-gpio-button-hotplug	kmod-gpio-nct5104d \
 	kmod-hwmon-core kmod-hwmon-k10temp kmod-leds-apu2 kmod-leds-gpio kmod-pcspkr \
 	kmod-sound-core kmod-sp5100_tco kmod-usb-core kmod-usb-ohci kmod-usb-serial \
 	kmod-usb2 kmod-usb3 \
+	kmod-cryptodev kmod-crypto-authenc kmod-crypto-null kmod-crypto-manager \
+	kmod-crypto-hash kmod-crypto-aead kmod-crypto-pcompress \
 	-kmod-e1000e -kmod-e1000 -kmod-r8169
 endef
 
