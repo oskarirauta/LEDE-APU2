@@ -1,7 +1,7 @@
 #!/bin/bash
 
 firstbuild=0
-clonedir=./lede
+clonedir=./openwrt
 cpu_num=$(grep -c processor /proc/cpuinfo)
 
 # Print messages in cyan blue
@@ -21,7 +21,7 @@ Msg "Starting Build Process!"
 if [ ! -d "$clonedir" ]; then
   firstbuild=1
   Msg "Cloning Repo..."
-  git clone https://github.com/lede-project/source $clonedir
+  git clone https://git.openwrt.org/openwrt/openwrt.git $clonedir
 fi
 
 if [ "$firstbuild" -eq "0" ]; then
