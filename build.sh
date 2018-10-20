@@ -36,6 +36,7 @@ Msg "Applying overlay..."
 cp -R ./overlay/* $clonedir/
 
 echo "src-git cups https://github.com/Gr4ffy/lede-cups.git" >> $clonedir/feeds.conf.default
+echo "CONFIG_GPIO_APU=m" >> $clonedir/target/linux/x86/64/config-default
 
 if [ "$firstbuild" -eq "1" ]; then
   Msg "Installing feeds..."
