@@ -35,6 +35,8 @@ fi
 Msg "Applying overlay..."
 cp -R ./overlay/* $clonedir/
 
+echo "src-git cups https://github.com/Gr4ffy/lede-cups.git" >> $clonedir/feeds.conf.default
+
 if [ "$firstbuild" -eq "1" ]; then
   Msg "Installing feeds..."
   cd $clonedir
