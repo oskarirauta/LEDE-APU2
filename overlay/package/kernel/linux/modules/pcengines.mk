@@ -20,3 +20,18 @@ define KernelPackage/hwmon-k10temp/description
 endef
 
 $(eval $(call KernelPackage,hwmon-k10temp))
+
+define KernelPackage/apu2-gpio
+  SUBMENU:=LED modules
+  TITLE:=APU2/3 extra gpio support
+  KCONFIG:=CONFIG_GPIO_APU
+  FILES:=$(LINUX_DIR)/drivers/gpio/gpio-apu.ko
+  AUTOLOAD:=$(call AutoLoad,80,gpio-apu)
+  DEPENDS:=@TARGET_x86||TARGET_x86_64 @GPIO_SUPPORT
+endef
+
+define KernelPackage/apu2-gpio/description
+  Extra support for apu2/3 gpios.
+endef
+
+$(eval $(call KernelPackage,apu2-gpio))
