@@ -1,0 +1,43 @@
+--- a/drivers/gpio/gpio-apu.c	2018-10-27 19:47:18.388076670 +0000
++++ b/drivers/gpio/gpio-apu.c	2018-10-27 19:55:09.873762761 +0000
+@@ -170,6 +170,22 @@
+ 			DMI_MATCH(DMI_BOARD_NAME, "APU3")
+ 		}
+ 	},
++	/* PC Engines APU3 with "Mainline" bios */
++	{
++		.ident = "apu2",
++		.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "PC Engines"),
++			DMI_MATCH(DMI_BOARD_NAME, "apu3")
++		}
++	},
++	/* Another */
++	{
++		.ident = "apu2",
++		.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "PC Engines"),
++			DMI_MATCH(DMI_BOARD_NAME, "PC Engines apu3")
++		}
++	},
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(dmi, apu_gpio_dmi_table);
+@@ -246,7 +262,7 @@
+ 	apu_gpio->chip = &gpio_apu_chip;
+ 	spin_lock_init(&apu_gpio->lock);
+ 
+-	if (dmi_match(DMI_PRODUCT_NAME, "APU3")) {
++	if ((dmi_match(DMI_PRODUCT_NAME, "APU3")) || (dmi_match(DMI_PRODUCT_NAME, "apu3")) || (dmi_match(DMI_PRODUCT_NAME, "PC Engines apu3"))) {
+ 		apu_gpio->offset = apu3_gpio_offset;
+ 		apu_gpio->addr = apu3_gpio_addr;
+ 		apu_gpio->iosize = APU_IOSIZE;
+@@ -303,6 +319,8 @@
+ 	      dmi_match(DMI_PRODUCT_NAME, "APU2") ||
+ 	      dmi_match(DMI_PRODUCT_NAME, "APU3") ||
+ 	      dmi_match(DMI_PRODUCT_NAME, "apu2") ||
++	      dmi_match(DMI_PRODUCT_NAME, "apu3") ||
++	      dmi_match(DMI_PRODUCT_NAME, "PC Engines apu3") ||
+ 	      dmi_match(DMI_PRODUCT_NAME, "PC Engines apu2"))) {
+ 		pr_err("Unknown PC Engines board: %s\n",
+ 				dmi_get_system_info(DMI_PRODUCT_NAME));
