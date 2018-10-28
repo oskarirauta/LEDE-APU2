@@ -33,7 +33,7 @@ define Package/grub2
   SECTION:=boot
   TITLE:=GRand Unified Bootloader
   URL:=http://www.gnu.org/software/grub/
-  DEPENDS:=@TARGET_x86||TARGET_x86_64
+  DEPENDS:=@TARGET_x86||TARGET_x86_64 +liblzma
 endef
 
 define Package/grub2-editenv
@@ -119,6 +119,10 @@ define Package/grub2/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/grub-sparc64-setup $(1)/usr/sbin/
 	$(INSTALL_DIR) $(1)/usr/share/grub
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/grub-mkconfig_lib $(1)/usr/share/grub/
+	$(INSTALL_DIR) $(1)/usr/share/locale
+	$(INSTALL_DIR) $(1)/usr/lib/grub/i386-pc
+	$(INSTALL_BIN) ./files/*.module $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_DATA) ./files/*.mod $(1)/usr/lib/grub/i386-pc/
 endef
 
 define Package/grub2-editenv/install
