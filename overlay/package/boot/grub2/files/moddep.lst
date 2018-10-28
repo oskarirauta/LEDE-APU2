@@ -232,6 +232,7 @@ syslinuxcfg: normal extcmd
 video_cirrus: pci video video_fb
 video_bochs: pci video video_fb
 http: net
+f2fs: fshelp
 gcry_blowfish: crypto
 extcmd:
 setjmp_test: setjmp functional_test
