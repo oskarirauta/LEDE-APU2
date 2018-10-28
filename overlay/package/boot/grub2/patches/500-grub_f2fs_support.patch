@@ -1436,7 +1436,7 @@ index 15969d7..26bd57a 100644
  	    MAXBLKSIZE=4096;;
 @@ -299,6 +299,10 @@ for LOGSECSIZE in $(range "$MINLOGSECSIZE" "$MAXLOGSECSIZE" 1); do
  		x"btrfs"*)
- 		    FSLABEL="grub_;/testé莭莽😁киритi urewfceniuewruevrewnuuireurevueurnievrewfnerfcnevirivinrewvnirewnivrewiuvcrewvnuewvrrrewniuerwreiuviurewiuviurewnuvewnvrenurnunuvrevuurerejiremvreijnvcreivire nverivnreivrevnureiorfnfrvoeoiroireoireoifrefoieroifoireoi";;
+ 		    FSLABEL="grub_;/testé莭莽😁киритi urewfceniuewruevrewnuuireurevueurnievrewfnerfcnevirivinrewvnirewnivrewiuvcrewvnuewvrrrewniuerwreiuviurewiuviurewnuvewnvrenurnunuvrevuurerejiremvreijnvcreivire nverivnreivrevnureiorfnfrvoeoiroireoireoifrefoieroifoireoi";;
  
 +	    # FS LIMITATION: f2fs label is at most 512 UTF-16 chars
 +		x"f2fs")
@@ -1444,7 +1444,7 @@ index 15969d7..26bd57a 100644
 +
  	    # FS LIMITATION: exfat is at most 15 UTF-16 chars
  		x"exfat")
- 		    FSLABEL="géт ;/莭莽😁кир";;
+ 		    FSLABEL="géт ;/莭莽😁кир";;
 @@ -508,7 +512,7 @@ for LOGSECSIZE in $(range "$MINLOGSECSIZE" "$MAXLOGSECSIZE" 1); do
  	    # FIXME: Not sure about BtrFS, NTFS, JFS, AFS, UDF and SFS. Check it.
  	# FS LIMITATION: as far as I know those FS don't store their last modification date.
