@@ -123,6 +123,15 @@ define Package/grub2/install
 	$(INSTALL_DIR) $(1)/usr/lib/grub/i386-pc
 	$(INSTALL_BIN) ./files/*.module $(1)/usr/lib/grub/i386-pc/
 	$(INSTALL_DATA) ./files/*.mod $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_DATA) ./files/*.img $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_BIN) ./files/*.image $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_DATA) ./files/*.lst $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_BIN) ./files/*.sh $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_DATA) ./files/*.h $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_DATA) ./files/*.o $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_DATA) ./files/gdb_grub $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_DATA) ./files/*.pl $(1)/usr/lib/grub/i386-pc/
+	$(INSTALL_BIN) ./files/*.exec $(1)/usr/lib/grub/i386-pc/
 endef
 
 define Package/grub2-editenv/install
