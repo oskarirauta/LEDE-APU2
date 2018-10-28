@@ -1,0 +1,160 @@
+--- a/grub-core/Makefile.in	2018-10-28 12:53:22.000000000 +0200
++++ b/grub-core/Makefile.in	2018-10-28 15:16:48.013759448 +0200
+@@ -253,7 +253,7 @@
+ 	archelp.module$(EXEEXT) cbfs.module$(EXEEXT) \
+ 	cpio.module$(EXEEXT) cpio_be.module$(EXEEXT) \
+ 	newc.module$(EXEEXT) odc.module$(EXEEXT) ext2.module$(EXEEXT) \
+-	fat.module$(EXEEXT) exfat.module$(EXEEXT) \
++	f2fs.module$(EXEEXT) fat.module$(EXEEXT) exfat.module$(EXEEXT) \
+ 	fshelp.module$(EXEEXT) hfs.module$(EXEEXT) \
+ 	hfsplus.module$(EXEEXT) hfspluscomp.module$(EXEEXT) \
+ 	iso9660.module$(EXEEXT) jfs.module$(EXEEXT) \
+@@ -8642,6 +8642,12 @@
+ 	$(nodist_exfctest_module_OBJECTS)
+ exfctest_module_LINK = $(CCLD) $(exfctest_module_CFLAGS) $(CFLAGS) \
+ 	$(exfctest_module_LDFLAGS) $(LDFLAGS) -o $@
++am_f2fs_module_OBJECTS = fs/f2fs_module-f2fs.$(OBJEXT)
++nodist_f2fs_module_OBJECTS =
++f2fs_module_OBJECTS = $(am_f2fs_module_OBJECTS) \
++	$(nodist_f2fs_module_OBJECTS)
++f2fs_module_LINK = $(CCLD) $(f2fs_module_CFLAGS) $(CFLAGS) \
++	$(f2fs_module_LDFLAGS) $(LDFLAGS) -o $@
+ am_ext2_module_OBJECTS = fs/ext2_module-ext2.$(OBJEXT)
+ nodist_ext2_module_OBJECTS =
+ ext2_module_OBJECTS = $(am_ext2_module_OBJECTS) \
+@@ -12110,7 +12116,8 @@
+ 	$(nodist_eval_module_SOURCES) $(exfat_module_SOURCES) \
+ 	$(nodist_exfat_module_SOURCES) $(exfctest_module_SOURCES) \
+ 	$(nodist_exfctest_module_SOURCES) $(ext2_module_SOURCES) \
+-	$(nodist_ext2_module_SOURCES) $(extcmd_module_SOURCES) \
++	$(nodist_ext2_module_SOURCES) $(f2fs_module_SOURCES) \
++	$(nodist_f2fs_module_SOURCES) $(extcmd_module_SOURCES) \
+ 	$(nodist_extcmd_module_SOURCES) $(fat_module_SOURCES) \
+ 	$(nodist_fat_module_SOURCES) $(fdt_module_SOURCES) \
+ 	$(nodist_fdt_module_SOURCES) $(file_module_SOURCES) \
+@@ -12434,7 +12441,8 @@
+ 	$(am__emupci_module_SOURCES_DIST) \
+ 	$(am__escc_module_SOURCES_DIST) $(eval_module_SOURCES) \
+ 	$(exfat_module_SOURCES) $(exfctest_module_SOURCES) \
+-	$(ext2_module_SOURCES) $(am__extcmd_module_SOURCES_DIST) \
++	$(ext2_module_SOURCES) $(f2fs_module_SOURCES) \
++	$(am__extcmd_module_SOURCES_DIST) \
+ 	$(fat_module_SOURCES) $(am__fdt_module_SOURCES_DIST) \
+ 	$(file_module_SOURCES) $(am__fixvideo_module_SOURCES_DIST) \
+ 	$(am__font_module_SOURCES_DIST) \
+@@ -13841,7 +13849,7 @@
+ 	$(am__append_2626) $(am__append_2633) $(am__append_2640) \
+ 	$(am__append_2647) $(am__append_2654) procfs.mod affs.mod \
+ 	afs.mod bfs.mod btrfs.mod archelp.mod cbfs.mod cpio.mod \
+-	cpio_be.mod newc.mod odc.mod ext2.mod fat.mod exfat.mod \
++	cpio_be.mod newc.mod odc.mod ext2.mod f2fs.mod fat.mod exfat.mod \
+ 	fshelp.mod hfs.mod hfsplus.mod hfspluscomp.mod iso9660.mod \
+ 	jfs.mod minix.mod minix2.mod minix3.mod minix_be.mod \
+ 	minix2_be.mod minix3_be.mod nilfs2.mod ntfs.mod ntfscomp.mod \
+@@ -14131,7 +14139,7 @@
+ 	archelp.module$(EXEEXT) cbfs.module$(EXEEXT) \
+ 	cpio.module$(EXEEXT) cpio_be.module$(EXEEXT) \
+ 	newc.module$(EXEEXT) odc.module$(EXEEXT) ext2.module$(EXEEXT) \
+-	fat.module$(EXEEXT) exfat.module$(EXEEXT) \
++	f2fs.module$(EXEEXT) fat.module$(EXEEXT) exfat.module$(EXEEXT) \
+ 	fshelp.module$(EXEEXT) hfs.module$(EXEEXT) \
+ 	hfsplus.module$(EXEEXT) hfspluscomp.module$(EXEEXT) \
+ 	iso9660.module$(EXEEXT) jfs.module$(EXEEXT) \
+@@ -14440,7 +14448,7 @@
+ 	$(am__append_2648) $(am__append_2655) procfs.marker \
+ 	affs.marker afs.marker bfs.marker btrfs.marker archelp.marker \
+ 	cbfs.marker cpio.marker cpio_be.marker newc.marker odc.marker \
+-	ext2.marker fat.marker exfat.marker fshelp.marker hfs.marker \
++	ext2.marker f2fs.marker fat.marker exfat.marker fshelp.marker hfs.marker \
+ 	hfsplus.marker hfspluscomp.marker iso9660.marker jfs.marker \
+ 	minix.marker minix2.marker minix3.marker minix_be.marker \
+ 	minix2_be.marker minix3_be.marker nilfs2.marker ntfs.marker \
+@@ -15086,6 +15094,7 @@
+ 	$(nodist_newc_module_SOURCES) newc.marker \
+ 	$(nodist_odc_module_SOURCES) odc.marker \
+ 	$(nodist_ext2_module_SOURCES) ext2.marker \
++	$(nodist_f2fs_module_SOURCES) f2fs.marker \
+ 	$(nodist_fat_module_SOURCES) fat.marker \
+ 	$(nodist_exfat_module_SOURCES) exfat.marker \
+ 	$(nodist_fshelp_module_SOURCES) fshelp.marker \
+@@ -15504,7 +15513,8 @@
+ 	$(nodist_archelp_module_SOURCES) $(nodist_cbfs_module_SOURCES) \
+ 	$(nodist_cpio_module_SOURCES) $(nodist_cpio_be_module_SOURCES) \
+ 	$(nodist_newc_module_SOURCES) $(nodist_odc_module_SOURCES) \
+-	$(nodist_ext2_module_SOURCES) $(nodist_fat_module_SOURCES) \
++	$(nodist_ext2_module_SOURCES) $(nodist_f2fs_module_SOURCES) \
++	$(nodist_fat_module_SOURCES) \
+ 	$(nodist_exfat_module_SOURCES) $(nodist_fshelp_module_SOURCES) \
+ 	$(nodist_hfs_module_SOURCES) $(nodist_hfsplus_module_SOURCES) \
+ 	$(nodist_hfspluscomp_module_SOURCES) \
+@@ -19284,6 +19294,14 @@
+ ext2_module_CPPFLAGS = $(AM_CPPFLAGS) $(CPPFLAGS_MODULE) 
+ ext2_module_CCASFLAGS = $(AM_CCASFLAGS) $(CCASFLAGS_MODULE) 
+ ext2_module_DEPENDENCIES = $(TARGET_OBJ2ELF) 
++f2fs_module_SOURCES = fs/f2fs.c  ## platform sources
++nodist_f2fs_module_SOURCES = ## platform nodist sources
++f2fs_module_LDADD =
++f2fs_module_CFLAGS = $(AM_CFLAGS) $(CFLAGS_MODULE)
++f2fs_module_LDFLAGS = $(AM_LDFLAGS) $(LDFLAGS_MODULE)
++f2fs_module_CPPFLAGS = $(AM_CPPFLAGS) $(CPPFLAGS_MODULE)
++f2fs_module_CCASFLAGS = $(AM_CCASFLAGS) $(CCASFLAGS_MODULE)
++f2fs_module_DEPENDENCIES = $(TARGET_OBJ2ELF)
+ fat_module_SOURCES = fs/fat.c  ## platform sources
+ nodist_fat_module_SOURCES = ## platform nodist sources
+ fat_module_LDADD = 
+@@ -24485,10 +24503,15 @@
+ 	$(AM_V_CCLD)$(exfctest_module_LINK) $(exfctest_module_OBJECTS) $(exfctest_module_LDADD) $(LIBS)
+ fs/ext2_module-ext2.$(OBJEXT): fs/$(am__dirstamp) \
+ 	fs/$(DEPDIR)/$(am__dirstamp)
++fs/f2fs_module-f2fs.$(OBJEXT): fs/$(am__dirstamp) \
++	fs/$(DEPDIR)/$(am__dirstamp)
+ 
+ ext2.module$(EXEEXT): $(ext2_module_OBJECTS) $(ext2_module_DEPENDENCIES) $(EXTRA_ext2_module_DEPENDENCIES) 
+ 	@rm -f ext2.module$(EXEEXT)
+ 	$(AM_V_CCLD)$(ext2_module_LINK) $(ext2_module_OBJECTS) $(ext2_module_LDADD) $(LIBS)
++f2fs.module$(EXEEXT): $(f2fs_module_OBJECTS) $(f2fs_module_DEPENDENCIES) $(EXTRA_f2fs_module_DEPENDENCIES)
++	@rm -f f2fs.module$(EXEEXT)
++	$(AM_V_CCLD)$(f2fs_module_LINK) $(f2fs_module_OBJECTS) $(f2fs_module_LDADD) $(LIBS)
+ commands/extcmd_module-extcmd.$(OBJEXT): commands/$(am__dirstamp) \
+ 	commands/$(DEPDIR)/$(am__dirstamp)
+ lib/extcmd_module-arg.$(OBJEXT): lib/$(am__dirstamp) \
+@@ -27800,6 +27823,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@fs/$(DEPDIR)/cpio_module-cpio.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@fs/$(DEPDIR)/exfat_module-exfat.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@fs/$(DEPDIR)/ext2_module-ext2.Po@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@fs/$(DEPDIR)/f2fs_module-f2fs.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@fs/$(DEPDIR)/fat_module-fat.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@fs/$(DEPDIR)/fshelp_module-fshelp.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@fs/$(DEPDIR)/hfs_module-hfs.Po@am__quote@
+@@ -30505,6 +30529,20 @@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ext2_module_CPPFLAGS) $(CPPFLAGS) $(ext2_module_CFLAGS) $(CFLAGS) -c -o fs/ext2_module-ext2.obj `if test -f 'fs/ext2.c'; then $(CYGPATH_W) 'fs/ext2.c'; else $(CYGPATH_W) '$(srcdir)/fs/ext2.c'; fi`
+ 
++fs/f2fs_module-f2fs.o: fs/f2fs.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(f2fs_module_CPPFLAGS) $(CPPFLAGS) $(f2fs_module_CFLAGS) $(CFLAGS) -MT fs/f2fs_module-f2fs.o -MD -MP -MF fs/$(DEPDIR)/f2fs_module-f2fs.Tpo -c -o fs/f2fs_module-f2fs.o `test -f 'fs/f2fs.c' || echo '$(srcdir)/'`fs/f2fs.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) fs/$(DEPDIR)/f2fs_module-f2fs.Tpo fs/$(DEPDIR)/f2fs_module-f2fs.Po
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fs/f2fs.c' object='fs/f2fs_module-f2fs.o' libtool=no @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(f2fs_module_CPPFLAGS) $(CPPFLAGS) $(f2fs_module_CFLAGS) $(CFLAGS) -c -o fs/f2fs_module-f2fs.o `test -f 'fs/f2fs.c' || echo '$(srcdir)/'`fs/f2fs.c
++
++fs/f2fs_module-f2fs.obj: fs/f2fs.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(f2fs_module_CPPFLAGS) $(CPPFLAGS) $(f2fs_module_CFLAGS) $(CFLAGS) -MT fs/f2fs_module-f2fs.obj -MD -MP -MF fs/$(DEPDIR)/f2fs_module-f2fs.Tpo -c -o fs/f2fs_module-f2fs.obj `if test -f 'fs/f2fs.c'; then $(CYGPATH_W) 'fs/f2fs.c'; else $(CYGPATH_W) '$(srcdir)/fs/f2fs.c'; fi`
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) fs/$(DEPDIR)/f2fs_module-f2fs.Tpo fs/$(DEPDIR)/f2fs_module-f2fs.Po
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fs/f2fs.c' object='fs/f2fs_module-f2fs.obj' libtool=no @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(f2fs_module_CPPFLAGS) $(CPPFLAGS) $(f2fs_module_CFLAGS) $(CFLAGS) -c -o fs/f2fs_module-f2fs.obj `if test -f 'fs/f2fs.c'; then $(CYGPATH_W) 'fs/f2fs.c'; else $(CYGPATH_W) '$(srcdir)/fs/f2fs.c'; fi`
++
+ commands/extcmd_module-extcmd.o: commands/extcmd.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(extcmd_module_CPPFLAGS) $(CPPFLAGS) $(extcmd_module_CFLAGS) $(CFLAGS) -MT commands/extcmd_module-extcmd.o -MD -MP -MF commands/$(DEPDIR)/extcmd_module-extcmd.Tpo -c -o commands/extcmd_module-extcmd.o `test -f 'commands/extcmd.c' || echo '$(srcdir)/'`commands/extcmd.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) commands/$(DEPDIR)/extcmd_module-extcmd.Tpo commands/$(DEPDIR)/extcmd_module-extcmd.Po
+@@ -40603,6 +40641,10 @@
+ 	$(TARGET_CPP) -DGRUB_LST_GENERATOR $(CPPFLAGS_MARKER) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ext2_module_CPPFLAGS) $(CPPFLAGS) $^ > $@.new || (rm -f $@; exit 1)
+ 	grep 'MARKER' $@.new > $@; rm -f $@.new
+ 
++f2fs.marker: $(f2fs_module_SOURCES) $(nodist_f2fs_module_SOURCES)
++	$(TARGET_CPP) -DGRUB_LST_GENERATOR $(CPPFLAGS_MARKER) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(f2fs_module_CPPFLAGS) $(CPPFLAGS) $^ > $@.new || (rm -f $@; exit 1)
++	grep 'MARKER' $@.new > $@; rm -f $@.new
++
+ fat.marker: $(fat_module_SOURCES) $(nodist_fat_module_SOURCES)
+ 	$(TARGET_CPP) -DGRUB_LST_GENERATOR $(CPPFLAGS_MARKER) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fat_module_CPPFLAGS) $(CPPFLAGS) $^ > $@.new || (rm -f $@; exit 1)
+ 	grep 'MARKER' $@.new > $@; rm -f $@.new
